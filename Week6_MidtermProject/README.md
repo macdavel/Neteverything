@@ -16,11 +16,13 @@ Arduino
 <a href='http://equip.nyuad.im/equip-items/adafruit-music-maker-mp3-shield-for-arduino-2/'>MP3 Shield</a>
 
 <a href='https://www.adafruit.com/products/789'>RFID/NFC Shield</a>
+
 Sensors
 
 
 The Software Stack:
 
 Arduino
+
 NodeJS
 
