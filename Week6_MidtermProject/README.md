@@ -10,6 +10,7 @@ We plan on building a james bond style spying briefcase. The aim of the project 
 The Hardware:
 
 Arduino
+
 <a href = 'http://equip.nyuad.im/equip-items/adafruit-huzzah-cc3000-wifi-shield-with-onboard-antenna/'> Wifi Shield</a>
 
 <a href='http://equip.nyuad.im/equip-items/adafruit-music-maker-mp3-shield-for-arduino-2/'>MP3 Shield</a>
