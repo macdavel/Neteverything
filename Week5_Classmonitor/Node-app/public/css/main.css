@@ -96,95 +96,14 @@ textarea {
    ========================================================================== */
 
 
-.score-container{
-    height: 100px;
-    display: block;
-    background: rgba(160, 160, 160, 0.24);
-    opacity:    0.9;
+h1{
+    text-align: center;
 }
 
-.quiz-container{
-    height:  400px;
-    /*width: 100;*/
-    /*background-color: aqua;*/
-    display:    block;
-    
-
+body{
+    background-image: url("http://cdn2.hubspot.net/hub/53/hubfs/00-Blog_Thinkstock_Images/color-palette.png");
+    background-size: cover;
 }
-
-#score{
-    z-index:    100;
-    font-size: 65px;
-    float: left;
-    color:  #11502E;
-    margin-left: 20px;
-    font-family: comic;
-}
-
-#lives-left{
-    z-index:    100;
-    font-size: 65px;
-    margin-right: 20px;
-    float: right;
-    color:  #11502E;
-     font-family: comic;
-}
-
-.question-container{
-    width: 600px;
-    margin: auto;
-}
-
-#question-title{
-    font-size:  65px;
-    border-bottom-style: solid;
-    border-bottom-width: 5px;
-    border-bottom-color: green;
-}
-
-#question-body{
-    margin-top:     10px;
-    font-size: 35px;
-
-}
-
-.answer-container{
-    margin-top: 30px;
-}
-
-.option-a{
-    display: table;
-    width: 600px;
-    margin: auto;
-    height: 65px;
-    background-color: rgba(128, 187, 128, 0.28);
-    margin-bottom: 10px;
-    border-radius:  10px;
-}
-
-.option-b{
-    display: table;
-    height: 65px;
-    width: 600px;
-    margin: auto;
-    background-color: rgba(255, 162, 0, 0.29);
-    border-radius:  10px;
-}
-
-.option-letter{
-    font-size: 35px;
-    float: left;
-    margin-right: 5px;
-    margin-left: 5px;
-}
-
-.option-body{
-    font-size: 35px;
-    float: left;
-}
-
-
-
 
 
 

@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-
+var secondsActive = 0;
 
 
 
@@ -55,8 +55,19 @@ app.get("/", function(req, res){
     res.render('index.html');
 });
 
+
+app.get("/API", function(req, res){
+    res.jsonp({secondsActive: secondsActive});
+});
+
+
 app.post('/', function (req, res) {
   console.log(req.headers);
+  console.log(req.headers['content-length']);
+  var data = req.headers['content-length']
+  var dataInt = parseInt(data);
+  secondsActive = dataInt;
+  console.log(typeof(req.headers['content-length']));
   console.log(req.body);
   // res.send('POST request to the homepage');
 });
