@@ -15,73 +15,20 @@ var http = require('http');
 
 
 
+
+
+
+
+
+
 var app = express();
 
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 
-var serialport = require("serialport");
-var SerialPort = serialport.SerialPort;
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
-
-
-
-var portName = 'COM14'; 
-var portOpened = false;
-
-var myPort = new SerialPort(portName, { 
-   baudRate: 9600,
-   // look for return and newline at the end of each data packet:
-   parser: serialport.parsers.readline("\r\n")
- }); 
-
-function showPortOpen() {
-   console.log('port open. Data rate: ' + myPort.options.baudRate);
-   portOpened =true;
-}
-
-
-function showPortClose() {
-   console.log('port closed.');
-}
-
-function showError(error) {
-   console.log('Serial port error: ' + error);
-}
-
-
-
-myPort.on('open', showPortOpen);  
-myPort.on('close', showPortClose);
-myPort.on('error', showError);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -139,17 +86,11 @@ console.log('Express started on port ' + port);
 
 
 
-
-myPort.on('data', function(data){
-})
+var donatedSeconds = 10;
 
 
 
-var donatedSeconds = 1000;
-
-
-
-
+stateOfSwitch = true;
 
 io.on('connection', function (socket) {
     socket.emit('news','handshake is done');
@@ -157,19 +98,21 @@ io.on('connection', function (socket) {
     prevState1 = false;
     prevState2 = false;
 
+    
+
   var countDown = setInterval(function() {
 
-    if(portOpened){
-      if(donatedSeconds >0){
-        donatedSeconds--;
-        myPort.write('on\n');
-      }
-      else if(donatedSeconds == 0){
-        myPort.write('off\n');
-      }
+    
 
+    if(donatedSeconds > 0){
+      donatedSeconds--;
+      io.sockets.emit('Switch', 'on');
     }
 
+    else if(donatedSeconds <= 0 ){
+      io.sockets.emit('Switch', 'off');
+
+    }
 
     socket.emit('updateSeconds', donatedSeconds);
 
@@ -178,12 +121,13 @@ io.on('connection', function (socket) {
   
   socket.on('addMoreSeconds', function (data) {
 
-    donatedSeconds += int(data);
+    donatedSeconds += parseInt(data);
     console.log("adding More seconds: "+ data);
-    if (portOpened){
-
-    }
   });
+
+  socket.on('message', function(data){
+    console.log(data);
+  })
 
 
 

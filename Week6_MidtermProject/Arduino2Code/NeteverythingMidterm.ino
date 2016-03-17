@@ -27,7 +27,7 @@ Servo screamServo;
 int ledState = HIGH;
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
-bool circuitState = true;
+
 
 
 
@@ -60,7 +60,14 @@ void setup() {
   // initialize serial:
   Serial.begin(9600);
   // reserve 200 bytes for the inputString:
+  Serial.println("Box Arduino Here");
   inputString.reserve(200);
+
+
+  //setup a digital pin that receives on/off command from ethernet arduino
+
+
+  pinMode(13, INPUT);
 
 
 
@@ -90,14 +97,15 @@ void loop() {
   // Check What the input command from the serial port
   double micLevel = checkMicLevel();
   Serial.println(micLevel);
-  checkCircuitState();
+
+  int circuitState = digitalRead(13);
   
   if(micLevel > 0.4){
       screamServo.write(120);
       servolock.write(90);
   }
   
-  if(circuitState == true){
+  if(circuitState == 1){
       checkCardID();
     }
   
@@ -105,46 +113,6 @@ void loop() {
 }
 
 
-
-
-void checkCircuitState(){
-  if (stringComplete) {
-    if (inputString == "on\n"){
-         circuitState = true;
-         ledState =HIGH;
-      }
-     else if(inputString == "off\n"){
-        circuitState = false; 
-        ledState =LOW;
-      }
-    // clear the string:
-    inputString = "";
-    stringComplete = false;
-  }
-
-}
-
-
-
-
-
-
-
-
-
-void serialEvent() {
-  while (Serial.available()) {
-    // get the new byte:
-    char inChar = (char)Serial.read();
-    // add it to the inputString:
-    inputString += inChar;
-    // if the incoming character is a newline, set a flag
-    // so the main loop can do something about it:
-    if (inChar == '\n') {
-      stringComplete = true;
-    }
-  }
-}
 
 
 
